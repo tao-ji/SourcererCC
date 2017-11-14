@@ -56,7 +56,7 @@ public class QueryLineProcessor implements Runnable {
             }
             long estimatedTime = System.nanoTime() - startTime;
             logger.debug(SearchManager.NODE_PREFIX + " QLP, QueryBlock "
-                    + queryBlock + " in " + estimatedTime / 1000 + " micros");
+                    + queryBlock + " in " + estimatedTime / 1000000 + " micros");
 
             SearchManager.queryBlockQueue.send(queryBlock);
             // System.out.println(SearchManager.NODE_PREFIX +

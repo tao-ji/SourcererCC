@@ -29,6 +29,7 @@ import com.mondego.utility.Util;
  */
 public class TermSearcher {
     private long queryId;
+    private long queryfunctionID;
     private String searchTerm;
     private int freqTerm;
     private IndexReader reader;
@@ -38,11 +39,12 @@ public class TermSearcher {
     private int computedThreshold;
     private int shard;
     private static final Logger logger = LogManager.getLogger(TermSearcher.class);
-    public TermSearcher(int shard, long qid) {
+    public TermSearcher(int shard, long qid, long qfid) {
         this.earlierDocs = new ArrayList<Long>();
         this.simMap = new HashMap<Long, CandidateSimInfo>();
         this.shard = shard;
         this.queryId = qid;
+	this.queryfunctionID = qfid;
     }
 
     public synchronized void searchWithPosition(int queryTermsSeen) {
@@ -79,6 +81,10 @@ public class TermSearcher {
                                                 .get(shard).getDocument(docId);
                                         long candidateId = Long.parseLong(d
                                                 .get("id"));
+					long functionIdCandidate = Long.parseLong(d.get("functionId"));
+					if(functionIdCandidate == queryfunctionID){
+						continue;
+					}
                                         // Get rid of these early -- we're only
                                         // looking for candidates
                                         // whose ids are smaller than the query

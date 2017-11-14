@@ -58,7 +58,7 @@ public class CandidateSearcher implements IListener, Runnable {
             IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException {
         long startTime = System.nanoTime();
 	int shard = queryBlock.getShardId();
-        TermSearcher termSearcher = new TermSearcher(shard, queryBlock.getId());
+        TermSearcher termSearcher = new TermSearcher(shard, queryBlock.getId(), queryBlock.getFunctionId());
 
         SearchManager.searcher.get(shard).search(queryBlock, termSearcher);
 
@@ -67,7 +67,7 @@ public class CandidateSearcher implements IListener, Runnable {
         qc.termSearcher = termSearcher;
         long estimatedTime = System.nanoTime() - startTime;
         logger.debug(SearchManager.NODE_PREFIX + " CandidateSearcher, QueryBlock " + queryBlock + " in shard "+
-			   shard+" in " + estimatedTime/1000 + " micros");
+			   shard+" in " + estimatedTime/1000000 + " micros");
         SearchManager.queryCandidatesQueue.send(qc);
     }
 

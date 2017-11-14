@@ -58,6 +58,9 @@ public class CloneValidator implements IListener, Runnable {
          */
 
         // long start_time = System.currentTimeMillis();
+        if (candidatePair.queryBlock.getFunctionId() == candidatePair.functionIdCandidate){
+		return;
+	}
         long startTime = System.nanoTime();
         if (candidatePair.candidateTokens != null && candidatePair.candidateTokens.trim().length() > 0) {
             int similarity = this.updateSimilarity(candidatePair.queryBlock, candidatePair.candidateTokens,
@@ -81,7 +84,7 @@ public class CloneValidator implements IListener, Runnable {
                  * e) { e.printStackTrace(); }
                  */
                 long estimatedTime = System.nanoTime() - startTime;
-                logger.debug(SearchManager.NODE_PREFIX + " CloneValidator, QueryBlock " + candidatePair + " in " + estimatedTime/1000 + " micros");
+                logger.debug(SearchManager.NODE_PREFIX + " CloneValidator, QueryBlock " + candidatePair + " in " + estimatedTime/1000000 + " micros");
                 SearchManager.reportCloneQueue.send(cp);
             }
             /*

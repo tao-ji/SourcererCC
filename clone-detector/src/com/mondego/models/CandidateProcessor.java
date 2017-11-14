@@ -84,6 +84,9 @@ public class CandidateProcessor implements IListener, Runnable {
                 CandidateSimInfo simInfo = entry.getValue();
                 long candidateId = Long.parseLong(doc.get("id"));
                 long functionIdCandidate = Long.parseLong(doc.get("functionId"));
+		if(functionIdCandidate == queryBlock.getFunctionId()){
+			continue;
+		}
                 int newCt = -1;
                 int candidateSize = Integer.parseInt(doc.get("size"));
                 if (candidateSize < queryBlock.getComputedThreshold()

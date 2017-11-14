@@ -412,7 +412,7 @@ public class SearchManager {
             wfs.populateLocalWordFreqMap();
         }
         long estimatedTime = System.nanoTime() - start_time;
-        logger.info("Total run Time: " + (estimatedTime / 1000) + " micors");
+        logger.info("Total run Time: " + (estimatedTime / 1000000) + " micors");
         logger.info("number of clone pairs detected: "
                 + SearchManager.clonePairsCount);
         theInstance.timeTotal = estimatedTime;

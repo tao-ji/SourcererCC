@@ -66,7 +66,7 @@ public class TokensFileReader {
                 long estimatedTime = System.nanoTime() - startTime;
                 logger.debug(this.nodeId + " RL " + lineNumber + ", file "
                         + parts[1] + ", " + ntokens + " tokens in "
-                        + estimatedTime / 1000 + " micros");
+                        + estimatedTime / 1000000 + " micros");
             }
             lineNumber++;
             if (SearchManager.ACTION_SEARCH.equals(SearchManager.ACTION)
